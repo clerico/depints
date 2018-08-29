@@ -1,5 +1,7 @@
 import "reflect-metadata";
 
+import { Newable } from '../types/Newable';
+
 /**
  *
  */
@@ -24,7 +26,9 @@ export class Injector {
         );
 
         service = new target(...injections);
-        this._services[serviceName] = service;
+        if ( serviceName !== undefined ) {
+            this._services[serviceName] = service;
+        } // TODO: why ?
 
         return service;
     }

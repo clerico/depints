@@ -1,6 +1,9 @@
 import "reflect-metadata";
+
 import { ModuleMetadata } from "./ModuleMetadata";
 import { Injector } from "./Injector";
+import { Newable } from '../types/Newable';
+
 
 /**
  *
