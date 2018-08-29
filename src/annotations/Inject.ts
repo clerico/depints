@@ -9,9 +9,9 @@ export function Inject(serviceName: string): ParameterDecorator {
     parameterIndex: number
   ) => {
     let serviceNames: string[]
-    if (Reflect.hasMetadata('indigen:servicenames', target))
+    if (Reflect.hasMetadata('indigen:servicenames', target)) {
       serviceNames = Reflect.getMetadata('indigen:servicenames', target)
-    else {
+    } else {
       serviceNames = []
       Reflect.defineMetadata('indigen:servicenames', serviceNames, target)
     }
