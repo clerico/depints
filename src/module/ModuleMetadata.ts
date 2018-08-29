@@ -1,4 +1,5 @@
 import { ModuleConfig } from './ModuleConfig'
+import { Injector } from './Injector'
 
 /**
  *
