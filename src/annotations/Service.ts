@@ -1,3 +1,4 @@
+
 import { GenericClassDecorator } from '../types/GenericClassDecorator'
 
 /**

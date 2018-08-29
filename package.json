@@ -27,29 +27,7 @@
     "start": "tsc -w & rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "lint-staged",
-    "prepush": "npm run test:prod && npm run build",
-    "commitmsg": "validate-commit-msg"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "prettier --write --tab-width 2",
-      "git add"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    },
-    "validate-commit-msg": {
-      "types": "conventional-commit-types",
-      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
-    }
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache"
   },
   "jest": {
     "transform": {

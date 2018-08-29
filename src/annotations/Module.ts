@@ -1,3 +1,4 @@
+
 import { GenericClassDecorator } from '../types/GenericClassDecorator'
 import { ModuleConfig } from '../module/ModuleConfig'
 import { setModuleMetadata, getModuleMetadata } from '../module'
