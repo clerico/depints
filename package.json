@@ -24,7 +24,7 @@
     "lint": "npm run lint-src && npm run lint-test",
     "prebuild": "rimraf dist",
     "build": "tsc && tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts",
-    "start": "tsc -w & rollup -c rollup.config.ts -w",
+    "start": "tsc -w & tsc --module commonjs --outDir dist/lib -w & rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache"

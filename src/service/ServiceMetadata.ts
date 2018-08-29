@@ -6,14 +6,12 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { ModuleConfig } from "./ModuleConfig";
-import { Injector } from "./Injector";
+import { ServiceConfig } from "./ServiceConfig";
 
 /**
  *
  */
-export interface ModuleMetadata {
+export interface ServiceMetadata {
     name: string;
-    config: ModuleConfig;
-    injector: Injector | null;
+    config: ServiceConfig;
 }

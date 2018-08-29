@@ -1,6 +1,15 @@
+/**
+ * Copyright (c) 2018 Jérôme CLERICO
+ * This file is part of "Brocoli project" which is released under MIT Licence.
+ * See file LICENCE for full license details.
+ * 
+ * Author(s):
+ *   - Jérôme CLERICO <jerome.clerico@indigen.com>
+ */
 import "reflect-metadata";
 
 import { Newable } from '../types/Newable';
+import { getServiceMetadata } from '../service/functions';
 
 /**
  *
@@ -13,8 +22,15 @@ export class Injector {
     }
 
     resolve<T>(target: Newable<any>, serviceName?: string): T {
-        if (serviceName === undefined) serviceName = target.name;
-
+        if (serviceName === undefined) {
+            const metadata = getServiceMetadata(target);
+            if ( metadata !== null ) {
+                serviceName = metadata.name;
+            } else {
+                serviceName = target.name; // TODO: in this case, compare prototype...
+            }
+        }
+            
         let service = this._services[serviceName];
         if (service !== undefined) return service;
 

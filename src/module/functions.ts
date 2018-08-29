@@ -1,8 +1,17 @@
+/**
+ * Copyright (c) 2018 Jérôme CLERICO
+ * This file is part of "Brocoli project" which is released under MIT Licence.
+ * See file LICENCE for full license details.
+ * 
+ * Author(s):
+ *   - Jérôme CLERICO <jerome.clerico@indigen.com>
+ */
 import "reflect-metadata";
 
 import { ModuleMetadata } from "./ModuleMetadata";
 import { Injector } from "./Injector";
 import { Newable } from '../types/Newable';
+import { Logger2 } from '../test2/Logger2';
 
 
 /**
@@ -44,13 +53,40 @@ export function getInjector(moduleClass: Newable<any>): Injector {
  * @param target
  */
 export function bootstrap(moduleClass: Newable<any>): Injector {
+    /*
     const metadata = getModuleMetadata(moduleClass);
     if (metadata.injector !== null) {
         throw new Error(`${moduleClass} has already been bootstrapped`);
     }
-    metadata.injector = new Injector(moduleClass);
+    */
+
+    const injector = new Injector(moduleClass);
+
+    injector.resolve(Logger2, "logger");
+
+    const runner = (_moduleClass: Newable<any>) => {
+        const metadata = getModuleMetadata(_moduleClass);
+        if ( metadata.config.dependencies !== undefined ) {
+            metadata.config.dependencies.forEach(runner);
+        }
+        injector.resolve(_moduleClass);
+    };
+
+    runner(moduleClass);
+
+    /*
+    if ( metadata.config.dependencies !== undefined ) {
+        // TODO
+        metadata.config.dependencies.forEach()
+    }
 
     // TODO for dependencies.
+    const moduleInstance = metadata.injector.resolve(moduleClass);
 
     return metadata.injector;
+    */
+
+    return injector;
 }
+
+
