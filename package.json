@@ -1,0 +1,112 @@
+{
+  "name": "brocoli",
+  "version": "0.0.1",
+  "description": "A lightweight dependency injection library for Typescript",
+  "keywords": [],
+  "main": "dist/brocoli.umd.js",
+  "module": "dist/brocoli.es5.js",
+  "typings": "dist/types/brocoli.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Jérôme CLERICO <jerome.clerico@indigen.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clerico/brocoli/"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint-src": "tslint -t codeFrame --project tsconfig.json './src/**/*.ts'",
+    "lint-test": "tslint -t codeFrame --project test.tsconfig.json './test/**/*.ts'",
+    "lint": "npm run lint-src && npm run lint-test",
+    "prebuild": "rimraf dist",
+    "build": "tsc && tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts",
+    "start": "tsc -w & rollup -c rollup.config.ts -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "lint-staged",
+    "prepush": "npm run test:prod && npm run build",
+    "commitmsg": "validate-commit-msg"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "prettier --write --no-semi --single-quote",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": "conventional-commit-types",
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+    }
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "collectCoverage": true
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.1",
+    "@types/node": "^9.4.0",
+    "@types/reflect-metadata": "^0.1.0",
+    "colors": "^1.1.2",
+    "commitizen": "^2.9.6",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.0.1",
+    "cz-conventional-changelog": "^2.0.0",
+    "function-arguments": "^1.0.8",
+    "husky": "^0.14.0",
+    "jest": "^22.0.1",
+    "lint-staged": "^7.0.0",
+    "lodash.camelcase": "^4.3.0",
+    "prettier": "^1.4.4",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^3.0.0-beta.2",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.57.0",
+    "rollup-plugin-commonjs": "^9.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "ts-jest": "^22.0.0",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.4.3",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-config-standard": "^7.0.0",
+    "typedoc": "^0.11.0",
+    "typescript": "^2.3.4",
+    "validate-commit-msg": "^2.12.2"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.12"
+  }
+}
