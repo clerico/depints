@@ -6,7 +6,7 @@ import camelCase from "lodash.camelcase";
 
 const pkg = require("./package.json");
 
-const libraryName = "brocoli";
+const libraryName = "depints";
 
 export default {
   input: `dist/es/${libraryName}.js`,

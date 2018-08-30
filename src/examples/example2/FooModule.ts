@@ -6,7 +6,7 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { Module, Inject } from "../../brocoli";
+import { Module, Inject } from "../../depints";
 
 import { LoggerInterface } from './LoggerInterface';
 

@@ -6,7 +6,7 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { bootstrap } from "../../brocoli";
+import { bootstrap } from "../../depints";
 
 import { MainModule } from './MainModule';
 

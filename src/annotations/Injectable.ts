@@ -34,7 +34,7 @@ export function Injectable<T = any>(
  * @param metadata
  */
 export function setInjectableMetadata<T>(injectableClass: Newable<T>, metadata: InjectableMetadata<T>): void {
-    Reflect.defineMetadata("brocoli:injectable", metadata, injectableClass);
+    Reflect.defineMetadata("depints:injectable", metadata, injectableClass);
 }
 
 /**
@@ -42,14 +42,14 @@ export function setInjectableMetadata<T>(injectableClass: Newable<T>, metadata: 
  * @param target
  */
 export function getInjectableMetadata<T>(injectableClass: Newable<T>, create: boolean = false): InjectableMetadata<T> | null {
-    if (!Reflect.hasMetadata("brocoli:injectable", injectableClass)) {
+    if (!Reflect.hasMetadata("depints:injectable", injectableClass)) {
         if (create) {
             const metadata = createMetadata(injectableClass, undefined, {});
             setInjectableMetadata(injectableClass, metadata);
             return metadata;
         } else return null;
     } else {
-        return Reflect.getMetadata("brocoli:injectable", injectableClass);
+        return Reflect.getMetadata("depints:injectable", injectableClass);
     }
 }
 

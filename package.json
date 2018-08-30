@@ -1,18 +1,18 @@
 {
-  "name": "brocoli",
+  "name": "depints",
   "version": "0.0.1",
   "description": "A lightweight dependency injection library for Typescript",
   "keywords": [],
-  "main": "dist/brocoli.umd.js",
-  "module": "dist/brocoli.es5.js",
-  "typings": "dist/types/brocoli.d.ts",
+  "main": "dist/depints.umd.js",
+  "module": "dist/depints.es5.js",
+  "typings": "dist/types/depints.d.ts",
   "files": [
     "dist"
   ],
   "author": "Jérôme CLERICO <jerome.clerico@indigen.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clerico/brocoli/"
+    "url": "https://github.com/clerico/depints/"
   },
   "license": "MIT",
   "engines": {
