@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2018 Jérôme CLERICO
- * This file is part of "Brocoli project" which is released under MIT Licence.
+ * This file is part of "Depints project" which is released under MIT Licence.
  * See file LICENCE for full license details.
  * 
  * Author(s):
