@@ -8,27 +8,22 @@
  */
 import "reflect-metadata";
 
+import { Newable } from '../types/Newable';
+import { getInjectableMetadata } from './Injectable';
+import { GenericParameterDecorator } from '../types/GenericParameterDecorator';
+
 /**
  *
- * @param serviceName
+ * @param injectableName
  */
-export function Inject(serviceName: string): ParameterDecorator {
+export function Inject(parameterInjectableName: string): GenericParameterDecorator<Newable<any>> {
     return (
-        target: Object,
+        injectableClass: Newable<any>,
         propertyKey: string | symbol,
         parameterIndex: number
     ) => {
-        let serviceNames: string[];
-        if (Reflect.hasMetadata("indigen:servicenames", target)) {
-            serviceNames = Reflect.getMetadata("indigen:servicenames", target);
-        } else {
-            serviceNames = [];
-            Reflect.defineMetadata(
-                "indigen:servicenames",
-                serviceNames,
-                target
-            );
-        }
-        serviceNames[parameterIndex] = serviceName;
+        const metadata = getInjectableMetadata(injectableClass, true);
+        if ( metadata === null ) throw new Error("never reachs");
+        metadata.toInject[parameterIndex] = parameterInjectableName;
     };
 }

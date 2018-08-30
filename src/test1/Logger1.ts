@@ -1,7 +1,7 @@
-import { Service } from '../annotations/Service';
+import { Injectable } from '../brocoli';
 
 
-@Service("Logger1")
+// @ Injectable("Logger1")
 export class Logger {
     constructor() {
         this.info("Logger1:constructor()");

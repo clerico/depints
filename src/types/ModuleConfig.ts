@@ -6,10 +6,13 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
+import { Newable } from '../types/Newable';
+import { InjectableConfig } from './InjectableConfig';
 
 /**
  *
  */
-export interface ServiceConfig {
-
+export interface ModuleConfig<T = any> extends InjectableConfig<T> {
+    dependencies?: Newable<T>[];
+    injectables?: { [name: string]: InjectableConfig };
 }

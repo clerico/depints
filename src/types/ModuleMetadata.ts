@@ -7,13 +7,11 @@
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
 import { ModuleConfig } from "./ModuleConfig";
-import { Injector } from "./Injector";
+import { InjectableMetadata } from './InjectableMetadata';
 
 /**
  *
  */
-export interface ModuleMetadata {
-    name: string;
-    config: ModuleConfig;
-    injector: Injector | null;
+export interface ModuleMetadata<T = any> extends InjectableMetadata<T, ModuleConfig<T>> {
+    // Nothing to add.
 }

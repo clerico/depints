@@ -6,10 +6,12 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
+import { Newable } from './Newable';
 
 /**
- *
+ * 
  */
-export interface Newable<T = any> {
-    new (...args: any[]): T;
+export interface InjectableConfig<T = any> {
+    newable?: Newable<T>;
+    instance?: T;
 }

@@ -9,18 +9,21 @@
 
 /* Annotations. */
 
-export { Module } from "./annotations/Module";
-export { Service } from "./annotations/Service";
+export { Injectable, getInjectableMetadata } from "./annotations/Injectable";
+export { Module, getModuleMetadata } from "./annotations/Module";
 export { Inject } from "./annotations/Inject";
 
-/* Modules. */
-
-export { ModuleConfig } from "./module/ModuleConfig";
-export { ModuleMetadata } from "./module/ModuleMetadata";
-export { Injector } from "./module/Injector";
-export { getModuleMetadata, setModuleMetadata, getInjector, bootstrap } from "./module/functions";
-
-/* Various types. */
+/* Types. */
 
 export { Newable } from "./types/Newable";
 export { GenericClassDecorator } from "./types/GenericClassDecorator";
+export { GenericParameterDecorator } from "./types/GenericParameterDecorator";
+export { InjectableConfig } from "./types/InjectableConfig";
+export { InjectableMetadata } from "./types/InjectableMetadata";
+export { ModuleConfig } from "./types/ModuleConfig";
+export { ModuleMetadata } from "./types/ModuleMetadata";
+
+/* Bootstraping. */
+
+export { bootstrap } from "./bootstrap/bootstrap";
+export { Injector } from "./bootstrap/Injector";

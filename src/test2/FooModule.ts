@@ -1,4 +1,4 @@
-import { Module, Service, bootstrap, Inject } from "../brocoli";
+import { Module, Inject } from "../brocoli";
 
 import { LoggerInterface } from './LoggerInterface';
 

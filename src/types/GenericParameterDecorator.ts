@@ -6,12 +6,8 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { ServiceConfig } from "./ServiceConfig";
 
-/**
- *
- */
-export interface ServiceMetadata {
-    name: string;
-    config: ServiceConfig;
-}
+ /**
+  *
+  */
+export type GenericParameterDecorator<T> = (target: T, propertyKey: string | symbol, parameterIndex: number) => void;

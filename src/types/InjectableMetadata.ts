@@ -6,11 +6,14 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { Newable } from '../types/Newable';
+
+import { InjectableConfig } from "./InjectableConfig";
 
 /**
  *
  */
-export interface ModuleConfig {
-    dependencies?: Newable<any>[];
+export interface InjectableMetadata<T = any, C extends InjectableConfig<T> = InjectableConfig<T>> {
+    name: string;
+    config: C;
+    toInject: { [constructorParameterIndex: number]: string }
 }

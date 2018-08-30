@@ -10,4 +10,4 @@
  /**
   *
   */
-export type GenericClassDecorator<T> = (target: T) => void
+export type GenericClassDecorator<T> = (target: T) => void;

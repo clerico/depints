@@ -1,4 +1,4 @@
-import { Module, Service, bootstrap } from "../brocoli";
+import { Module } from "../brocoli";
 
 import { Logger } from "./Logger1";
 
