@@ -6,9 +6,9 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { Module } from "../../src/brocoli";
+import { Module, Inject } from "../../brocoli";
 
-import { Logger } from "./Logger1";
+import { LoggerInterface } from './LoggerInterface';
 
 /**
  * 
@@ -17,7 +17,11 @@ import { Logger } from "./Logger1";
     dependencies: []
 })
 export class FooModule {
-    constructor(logger: Logger) {
+    constructor(
+        @Inject("logger") logger: LoggerInterface,
+        @Inject("message") message: string,
+    ) {
         logger.info("FooModule::constructor()");
+        logger.info("message", message);
     }
 }

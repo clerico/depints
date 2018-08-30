@@ -6,19 +6,26 @@
  * Author(s):
  *   - Jérôme CLERICO <jerome.clerico@indigen.com>
  */
-import { Module } from "../../src/brocoli";
+import { Module, Inject } from "../../brocoli";
 
-import { Logger } from "./Logger2";
 import { FooModule } from './FooModule';
+import { LoggerInterface } from './LoggerInterface';
+import { Logger1 } from './Logger1';
 
 /**
  * 
  */
 @Module("main", {
-    dependencies: [FooModule]
+    dependencies: [FooModule],
+    injectables: {
+        "logger": { newable: Logger1 },
+        "message": { instance: "Hello World !!!" }
+    }
 })
 export class MainModule {
-    constructor(logger: Logger) {
+    constructor(
+        @Inject("logger") logger: LoggerInterface
+    ) {
        logger.info("MainModule::constructor()");
     }
 }
