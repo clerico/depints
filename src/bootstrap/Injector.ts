@@ -17,15 +17,16 @@ import { getInjectableMetadata } from '../annotations/Injectable';
  */
 export class Injector<T = any> {
 
-    private injectableConfigs: { [name: string]: InjectableConfig<T> } = {};
-    private injectableInstances: { [name: string]: T } = {};
+    private injectableConfigByName: { [name: string]: InjectableConfig<T> } = {};
+    private injectableInstanceByName: { [name: string]: T } = {};
+    private injectableInstanceBags: { newable: Newable<T>, instance: T }[] = [];
 
     /**
      * 
-     * @param injectableConfigs 
+     * @param injectableConfigByName 
      */
-    declare(injectableConfigs: { [name: string]: InjectableConfig<T> }): Injector<T> {
-        this.injectableConfigs = { ...injectableConfigs, ...this.injectableConfigs };
+    declare(injectableConfigByName: { [name: string]: InjectableConfig<T> }): Injector<T> {
+        this.injectableConfigByName = { ...injectableConfigByName, ...this.injectableConfigByName };
         return this;
     }
 
@@ -44,27 +45,35 @@ export class Injector<T = any> {
             if ( metadata !== null ) {
                 injectableName = metadata.name;
                 config = { ...metadata.config, ...config };
-            } else {
-                injectableName = newable.name; // TODO: in this case, compare prototype...
             }
         }
 
         // An instance already exists?
-        let instance = this.injectableInstances[injectableName] as S;
-        if ( instance !== undefined ) {
-            return instance;
+        if ( injectableName !== undefined ) {
+            const instance = this.injectableInstanceByName[injectableName] as S;
+            if ( instance !== undefined ) return instance;
+        } else {
+            const bag = this.injectableInstanceBags.find(bag => bag.newable === newable);
+            if ( bag !== undefined ) return bag.instance as S;
         }
 
         // Finish to resolve config.
-        if ( this.injectableConfigs[injectableName] !== undefined ) {
-            config = this.injectableConfigs[injectableName];
+        if ( injectableName !== undefined ) {
+            if ( this.injectableConfigByName[injectableName] !== undefined ) {
+                config = this.injectableConfigByName[injectableName];
+            }
         }
 
         // Config has a instance? (ie no needs to instanciate)
-        instance = config.instance;
-        if ( instance !== undefined ) {
-            this.injectableInstances[injectableName] = instance;
-            return instance;
+        if ( config.instance !== undefined ) {
+            if ( injectableName !== undefined ) {
+                this.injectableInstanceByName[injectableName] = config.instance;
+            } else {
+                if ( config.newable === undefined ) throw new Error("fail to resolve");
+                const bag = { newable: config.newable, instance: config.instance };
+                this.injectableInstanceBags.push(bag);
+            }
+            return config.instance;
         }
 
         // Resolve constructor for the newable.
@@ -77,8 +86,13 @@ export class Injector<T = any> {
         );
 
         // Create instance.
-        instance = new config.newable(...injections);
-        this.injectableInstances[injectableName] = instance;
+        const instance = new config.newable(...injections);
+        if ( injectableName !== undefined ) {
+            this.injectableInstanceByName[injectableName] = instance;
+        } else {
+            const bag = { newable: config.newable, instance };
+            this.injectableInstanceBags.push(bag);
+        }
         return instance;
     }
 }

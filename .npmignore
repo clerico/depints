@@ -1,4 +1,4 @@
-/dist
+/src
 /node_modules
 /test
 /tools
@@ -9,4 +9,4 @@
 /test.tsconfig.json
 /tsconfig.json
 /tslint.json
-/yarn.lock
+/examples
